@@ -1,9 +1,9 @@
-absl-py==2.1.0
+absl-py
 astunparse==1.6.3
-certifi==2024.7.4
-charset-normalizer==3.3.2
-contourpy==1.2.1
-cycler==0.12.1
+certifi
+charset-normalizer
+
+cycler
 distlib==0.3.8
 filelock==3.15.4
 flatbuffers==24.3.25
