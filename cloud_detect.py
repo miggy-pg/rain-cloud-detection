@@ -1,10 +1,10 @@
 import os, cv2, cloud
 
-OPENCV_WORKSPACE = "C:\\Users\\gaged\\OneDrive\\School\\" + \
-        "Cloud Coverage Calculator\\opencv_workspace\\"
+OPENCV_WORKSPACE = "" 
 
-CLOUD_CASCADE = cv2.CascadeClassifier(OPENCV_WORKSPACE + "cascades\\cloudsCascade.xml")
-CIRRUS_FEATURES = cv2.cvtColor(cv2.imread(OPENCV_WORKSPACE + "cirrusFeat.jpg"), cv2.COLOR_RGB2GRAY)
+CLOUD_CASCADE = cv2.CascadeClassifier("/home/miggy/Desktop/apps/rain-cloud-detection/opencv_workspace/cascades/cloud_cascade.xml")
+# CLOUD_CASCADE = cv2.CascadeClassifier(OPENCV_WORKSPACE + "cascades\\cloudsCascade.xml")
+CIRRUS_FEATURES = cv2.cvtColor(cv2.imread("/home/miggy/Desktop/apps/rain-cloud-detection/cirrusFeat.jpg"), cv2.COLOR_RGB2GRAY)
 
 RECT_THICKNESS = 1
 RECT_COLOR = (255, 0, 0)
@@ -30,7 +30,8 @@ def display_image(image):
 
 def main():
     # for image_path in os.listdir(IMAGES_DIR):
-    image = cv2.imread(OPENCV_WORKSPACE + "clouds.jpg")
+    image = cv2.imread("/home/miggy/Desktop/apps/rain-cloud-detection/waterspouts.webp")
+    # image = cv2.imread(OPENCV_WORKSPACE + "clouds.jpg")
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     
     finds = CLOUD_CASCADE.detectMultiScale(gray,
@@ -57,8 +58,8 @@ def main():
         matches = bf.match(des1, des2)
         matches = sorted(matches, key = lambda x:x.distance)
         subimage = gray[cloud_.y:(cloud_.y + cloud_.h), cloud_.x:(cloud_.x + cloud_.w)]
-        match_image = cv2.drawMatches(subimage, kp1, CIRRUS_FEATURES, kp2,
-                matches, flags = 2, outImg = None)
+        # match_image = cv2.drawMatches(subimage, kp1, CIRRUS_FEATURES, kp2, matches, flags = 2, outImg = None)
+        match_image = cv2.drawMatches(subimage, kp1, CIRRUS_FEATURES, kp2, matches, flags = 2, outImg = None)
         
         print(len(matches), "matches")
         

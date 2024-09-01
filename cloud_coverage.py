@@ -46,19 +46,19 @@ def color_printer(h0, s0, v0, hstep, sstep, vstep, hmax, smax, vmax, directory):
                 test = Image.new("HSV", (5, 5), (int(h), int(s), int(v)))
                 test = test.convert("RGB")
                 test.save(directory + "h" + str(h) + "s" + str(s) + "v" + str(v) +".jpg")
-                print "Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v)
+                print("Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v))
                 s += sstep
             s = s0
             test = Image.new("HSV", (5, 5), (int(h), int(s), int(v)))
             test = test.convert("RGB")
             test.save(directory + "h" + str(h) + "s" + str(s) + "v" + str(v) +".jpg")
-            print "Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v)
+            print( "Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v))
             v += vstep
         v = v0
         test = Image.new("HSV", (5, 5), (int(h), int(s), int(v)))
         test = test.convert("RGB")
         test.save(directory + "h" + str(h) + "s" + str(s) + "v" + str(v) +".jpg")
-        print "Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v)
+        print( "Processing image: H:" + str(h) + " S:" + str(s) + " V:" + str(v))
         h += hstep
 
 def create_blank_HSV(image, background):
@@ -150,7 +150,7 @@ def do_testing_vary_q(image_from_dir, image_to_dir, qstep, qmax):
             if not fileName.endswith(".jpg"):
                 continue
                 
-            print "Processing q" + str(qnum) + " image " + str(i)
+            print( "Processing q" + str(qnum) + " image " + str(i))
     
             #read the image
             im = Image.open(image_from_dir + fileName)
@@ -223,9 +223,9 @@ def do_testing_vary_q(image_from_dir, image_to_dir, qstep, qmax):
         draw.text((0, (q.height / 2)), "100%  count: " + str(fail) + "\nTotal pics: " + str(i), (0, 0, 255), font)
         text = text.convert("RGB")
         text.save(image_to_dir +"test_images_q" + str(qnum) + "/info.jpg")
-        print "Processing q" + str(qnum) + " complete."
-        print "Failures:", fail
-        print "Total pics:", (i-1)
+        print( "Processing q" + str(qnum) + " complete.")
+        print( "Failures:", fail)
+        print( "Total pics:", (i-1))
     
         #increment qnum by qstep
         qnum += qstep
@@ -248,7 +248,7 @@ def do_testing(image_from_dir, image_to_dir):
         if not fileName.endswith(".jpg"):
             continue
                 
-        print "Processing image " + str(i)
+        print( "Processing image " + str(i))
     
         #read the image
         im = Image.open(image_from_dir + fileName)
@@ -321,8 +321,8 @@ def do_testing(image_from_dir, image_to_dir):
         i += 1    
     
     #create text image with number of images and number of "fails", write to directory
-    print "Failures:", fail
-    print "Total pics:", (i-1)
+    print( "Failures:", fail)
+    print( "Total pics:", (i-1))
 
 def ConvertToCoords(textfile):
     """Parses a text file with format [x, y, w, h] on each line to a dictionary with Rectangle objects
@@ -450,14 +450,14 @@ def count_sky_pixels(q, im, skycolor, newpix):
                 diffH = abs(h - h0)
                 diffSV = abs((s + v) - (s0 + v0))
                 #check is pixel is within range of original color
-            	if diffH <= 10 and diffSV <= 80 or\
-                diffH > 10 and diffH <= 20 and diffSV <= 70 or\
-                diffH > 20 and diffH <= 30 and diffSV <= 60 or\
-                diffH > 30 and diffH <= 40 and diffSV <= 50 or\
-                diffH > 40 and diffH <= 50 and diffSV <= 40 or\
-                diffH > 50 and diffH <= 60 and diffSV <= 30 or\
-                diffH > 60 and diffH <= 70 and diffSV <= 20 or\
-                diffH > 70 and diffH <= 80 and diffSV <= 10:
+                if (diffH <= 10 and diffSV <= 80 or
+                diffH > 10 and diffH <= 20 and diffSV <= 70 or
+                diffH > 20 and diffH <= 30 and diffSV <= 60 or
+                diffH > 30 and diffH <= 40 and diffSV <= 50 or
+                diffH > 40 and diffH <= 50 and diffSV <= 40 or
+                diffH > 50 and diffH <= 60 and diffSV <= 30 or
+                diffH > 60 and diffH <= 70 and diffSV <= 20 or
+                diffH > 70 and diffH <= 80 and diffSV <= 10):
                     newpix[x,y] = im.getpixel((x,y))
                     sky_count +=1
     
@@ -482,14 +482,15 @@ def get_sky_color(im, rects):
                 h,s,v = im.getpixel((x,y))
                 diffH = abs(h - h0)
                 diffSV = abs((s + v) - (s0 + v0))
-            	if diffH <= 10 and diffSV <= 80 or\
-                diffH > 10 and diffH <= 20 and diffSV <= 70 or\
-                diffH > 20 and diffH <= 30 and diffSV <= 60 or\
-                diffH > 30 and diffH <= 40 and diffSV <= 50 or\
-                diffH > 40 and diffH <= 50 and diffSV <= 40 or\
-                diffH > 50 and diffH <= 60 and diffSV <= 30 or\
-                diffH > 60 and diffH <= 70 and diffSV <= 20 or\
-                diffH > 70 and diffH <= 80 and diffSV <= 10:
+                
+                if (diffH <= 10 and diffSV <= 80 or
+                    diffH > 10 and diffH <= 20 and diffSV <= 70 or
+                    diffH > 20 and diffH <= 30 and diffSV <= 60 or
+                    diffH > 30 and diffH <= 40 and diffSV <= 50 or
+                    diffH > 40 and diffH <= 50 and diffSV <= 40 or
+                    diffH > 50 and diffH <= 60 and diffSV <= 30 or
+                    diffH > 60 and diffH <= 70 and diffSV <= 20 or
+                    diffH > 70 and diffH <= 80 and diffSV <= 10):
                     scount += 1
                     simpix[str(i) + "Color "] = (h0, s0, v0)
                     
@@ -536,8 +537,9 @@ def get_all(sky_image, isDaytime):
     
 #########TESTING get_all#############
 #insert your filepath to test image    
-im = Image.open("C:\Users\meela\Videos\apps\rain-cloud-detection\cloud.jpg")
+im = Image.open("/home/miggy/Desktop/apps/rain-cloud-detection/mountain.jpg")
+# im = Image.open("C:\Users\meela\Videos\apps\rain-cloud-detection\cloud.jpg")
 im, coverage = get_all(im, True)
 #show result
-print "Cloud Coverage: ", coverage
+print("Cloud Coverage: ", coverage)
 im.show()
